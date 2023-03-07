@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gamma-Manager", "Gamma-Manager\Gamma-Manager.vcxproj", "{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}.Debug|x64.ActiveCfg = Debug|x64
+		{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}.Debug|x64.Build.0 = Debug|x64
+		{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}.Debug|x86.ActiveCfg = Debug|Win32
+		{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}.Debug|x86.Build.0 = Debug|Win32
+		{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}.Release|x64.ActiveCfg = Release|x64
+		{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}.Release|x64.Build.0 = Release|x64
+		{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}.Release|x86.ActiveCfg = Release|Win32
+		{ABD8CB71-78D6-4F78-A0B7-9967BD90F8A6}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5A009ACC-F845-4A28-8C39-1E27CAE0528D}
+	EndGlobalSection
+EndGlobal
