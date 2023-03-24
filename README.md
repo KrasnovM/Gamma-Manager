@@ -7,7 +7,7 @@ Trackbar for major changes, keyboard arrows or mouse clicks to sides from trackb
 <pre>
 Gamma 0.3 - 4.4               | CreateGammaRamp function doesn't work with lesser or bigger values<br />
 Brightness -1.0 - 1.0         | Values out of range don't provide any effect<br />
-Contrast 0.10 - 3.00|100.00   | 0.10 cap for safety reasons - lesser values may make screen absolutely gray, first upper limit for practical use, second limit for memes<br /> 
+Contrast 0.10 - 3.00|100.00   | 0.10 cap for safety reasons, first upper limit for practical use, second limit for memes
 </pre>
 
 Small image for calibration purposes.
