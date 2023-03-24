@@ -4,9 +4,11 @@ Checkbox for extreme contrast values.
 
 Trackbar for major changes, keyboard arrows or mouse clicks to sides from trackbar pointer for minor changes.
 
-Gamma 0.3 - 4.4               | CreateGammaRamp function doesn't work with lesser or bigger values
-Brightness -1.0 - 1.0         | Values out of range don't provide any effect
-Contrast 0.10 - 3.00|100.00   | 0.10 cap for safety reasons - lesser values may make screen absolutely gray, first upper limit for practical use, second limit for memes 
+Gamma 0.3 - 4.4               | CreateGammaRamp function doesn't work with lesser or bigger values<br />
+Brightness -1.0 - 1.0         | Values out of range don't provide any effect<br />
+Contrast 0.10 - 3.00|100.00   | 0.10 cap for safety reasons - lesser values may make screen absolutely gray, first upper limit for practical use, second limit for memes<br /> 
+
+Small image for calibration purposes.
 
 ComboBox with monitors, change manually, with mouse wheel or button "Forward" to scroll.
 ComboBox with presets, choose manually, with mouse wheel or input name. 
