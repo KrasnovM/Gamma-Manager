@@ -4,9 +4,11 @@ Checkbox for extreme contrast values.
 
 Trackbar for major changes, keyboard arrows or mouse clicks to sides from trackbar pointer for minor changes.
 
+<pre>
 Gamma 0.3 - 4.4               | CreateGammaRamp function doesn't work with lesser or bigger values<br />
 Brightness -1.0 - 1.0         | Values out of range don't provide any effect<br />
 Contrast 0.10 - 3.00|100.00   | 0.10 cap for safety reasons - lesser values may make screen absolutely gray, first upper limit for practical use, second limit for memes<br /> 
+</pre>
 
 Small image for calibration purposes.
 
@@ -22,4 +24,4 @@ Monitor brightness and contrast (if available) trackbars, 0 - 100, same function
 Restore minimized window: double click or right click on tray icon - > Settings.
 All monitors should be shown in tray as ComboBoxes with presets as items.
 
-Exit: red "x" in upper right or double click or right click on tray icon - > Exit.
+Exit: red "x" in upper right or right click on tray icon - > Exit.
