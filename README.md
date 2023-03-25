@@ -3,6 +3,8 @@
 Archive password: GammaManager.
 Antivirus notifications: work in progress...  
 
+![image](GammaManager.jpg?raw=true)
+
 Color buttons allow to manage gamma ramp options independently for rgb or altogether.
 Checkbox for extreme contrast values.
 
