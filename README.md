@@ -1,7 +1,5 @@
 # Gamma Manager
 
-Archive password: GammaManager. Antivirus notifications: work in progress...  <br />
-
 Doesn't need setup, works from .exe file. The only additional .ini file is created in the same folder as .exe file (to save settings presets).
 
 ![image](GammaManager.jpg?raw=true)
