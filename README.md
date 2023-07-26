@@ -18,8 +18,12 @@ Contrast 0.10 - 3.00|100.00   | 0.10 cap for safety reasons, first upper limit f
 Small image for calibration purposes.
 
 ComboBox with monitors, change manually, with mouse wheel or button "Forward" to scroll.
-ComboBox with presets, choose manually, with mouse wheel or input name. 
-"Save" to create or override preset in .ini file. "Delete" to erase preset from .ini file.
+
+ComboBox with presets, choose manually or with mouse wheel. 
+
+To save preset write a name in empty ComboBox and click "Save" to put preset in .ini file. 
+
+Choose and click "Delete" to erase preset from .ini file.
 
 Monitor brightness and contrast (if available) trackbars, 0 - 100, same functional as gamma ramp trackbars.
 
