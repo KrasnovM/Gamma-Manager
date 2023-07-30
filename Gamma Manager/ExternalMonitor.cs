@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace Gamma_Manager
 {
-    internal class ExternalBrightness
+    internal class ExternalMonitor
     {
         #region DllImport
         [DllImport("dxva2.dll", EntryPoint = "GetMonitorBrightness")]

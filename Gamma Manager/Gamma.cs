@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using System.Runtime.InteropServices;
 
 namespace Gamma_Manager
@@ -11,6 +10,12 @@ namespace Gamma_Manager
             if (val.CompareTo(min) < 0) return min;
             else if (val.CompareTo(max) > 0) return max;
             else return val;
+        }
+
+        public static float[] GetGammaRamp ()
+        {
+
+            return null;
         }
 
         public static ushort[,] CreateGammaRamp(float rGamma, float gGamma, float bGamma, float rContrast, float gContrast, float bContrast, float rBright, float gBright, float bBright)

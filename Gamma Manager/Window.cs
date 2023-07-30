@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Gamma_Manager
 {
@@ -74,7 +72,7 @@ namespace Gamma_Manager
                 toolMonitor.Items.Add(displays[i].displayName + ":");
                 toolMonitor.Text = displays[i].displayName + ":";
 
-                toolMonitor.SelectedIndexChanged += new EventHandler(comboBoxToolMonitor_SelectedIndexChanged);
+                toolMonitor.SelectedIndexChanged += new EventHandler(comboBoxToolMonitor_TextChanged);
 
                 string[] presets = iniFile.GetSections();
                 if (presets != null)
@@ -101,13 +99,13 @@ namespace Gamma_Manager
         {
             disableChangeFunc = true;
 
-            textBoxGamma.Text = ((currDisplay.rGamma + currDisplay.gGamma + currDisplay.bGamma) / 3f).ToString("0.0");
+            textBoxGamma.Text = ((currDisplay.rGamma + currDisplay.gGamma + currDisplay.bGamma) / 3f).ToString("0.00");
             textBoxContrast.Text = ((currDisplay.rContrast + currDisplay.gContrast + currDisplay.bContrast) / 3f).ToString("0.00");
-            textBoxBrightness.Text = ((currDisplay.rBright + currDisplay.gBright + currDisplay.bBright) / 3f).ToString("0.0");
+            textBoxBrightness.Text = ((currDisplay.rBright + currDisplay.gBright + currDisplay.bBright) / 3f).ToString("0.00");
 
-            trackBarGamma.Value = (int)(((currDisplay.rGamma + currDisplay.gGamma + currDisplay.bGamma) / 3f) * 10f);
+            trackBarGamma.Value = (int)(((currDisplay.rGamma + currDisplay.gGamma + currDisplay.bGamma) / 3f) * 100f);
             trackBarContrast.Value = (int)(((currDisplay.rContrast + currDisplay.gContrast + currDisplay.bContrast) / 3f) * 100f);
-            trackBarBrightness.Value = (int)(((currDisplay.rBright + currDisplay.gBright + currDisplay.bBright) / 3f) * 10f);
+            trackBarBrightness.Value = (int)(((currDisplay.rBright + currDisplay.gBright + currDisplay.bBright) / 3f) * 100f);
 
             if (currDisplay.isExternal)
             {
@@ -116,11 +114,11 @@ namespace Gamma_Manager
                 trackBarMonitorContrast.Visible = true;
                 textBoxMonitorContrast.Visible = true;
 
-                textBoxMonitorBrightness.Text = ExternalBrightness.GetBrightness(currDisplay.PhysicalHandle).ToString();
-                trackBarMonitorBrightness.Value = ExternalBrightness.GetBrightness(currDisplay.PhysicalHandle);
+                textBoxMonitorBrightness.Text = ExternalMonitor.GetBrightness(currDisplay.PhysicalHandle).ToString();
+                trackBarMonitorBrightness.Value = ExternalMonitor.GetBrightness(currDisplay.PhysicalHandle);
 
-                textBoxMonitorContrast.Text = ExternalBrightness.GetContrast(currDisplay.PhysicalHandle).ToString();
-                trackBarMonitorContrast.Value = ExternalBrightness.GetContrast(currDisplay.PhysicalHandle);
+                textBoxMonitorContrast.Text = ExternalMonitor.GetContrast(currDisplay.PhysicalHandle).ToString();
+                trackBarMonitorContrast.Value = ExternalMonitor.GetContrast(currDisplay.PhysicalHandle);
             }
             else
             {
@@ -129,8 +127,8 @@ namespace Gamma_Manager
                 trackBarMonitorContrast.Visible = false;
                 textBoxMonitorContrast.Visible = false;
 
-                textBoxMonitorBrightness.Text = InternalBrightness.GetBrightness().ToString();
-                trackBarMonitorBrightness.Value = InternalBrightness.GetBrightness();
+                textBoxMonitorBrightness.Text = InternalMonitor.GetBrightness().ToString();
+                trackBarMonitorBrightness.Value = InternalMonitor.GetBrightness();
             }
             disableChangeFunc = false;
         }
@@ -188,13 +186,13 @@ namespace Gamma_Manager
 
             if (!disableChangeFunc)
             {
-                textBoxGamma.Text = ((float)trackBarGamma.Value / 10f).ToString("0.0");
+                textBoxGamma.Text = ((float)trackBarGamma.Value / 100f).ToString("0.00");
 
                 if (allColors)
                 {
-                    currDisplay.rGamma = (float)trackBarGamma.Value / 10f;
-                    currDisplay.gGamma = (float)trackBarGamma.Value / 10f;
-                    currDisplay.bGamma = (float)trackBarGamma.Value / 10f;
+                    currDisplay.rGamma = (float)trackBarGamma.Value / 100f;
+                    currDisplay.gGamma = (float)trackBarGamma.Value / 100f;
+                    currDisplay.bGamma = (float)trackBarGamma.Value / 100f;
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, currDisplay.rContrast,
                         currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, currDisplay.bBright));
@@ -203,7 +201,7 @@ namespace Gamma_Manager
 
                 if (redColor)
                 {
-                    currDisplay.rGamma = (float)trackBarGamma.Value / 10f;
+                    currDisplay.rGamma = (float)trackBarGamma.Value / 100f;
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, currDisplay.rContrast,
                         currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, currDisplay.bBright));
@@ -212,7 +210,7 @@ namespace Gamma_Manager
 
                 if (greenColor)
                 {
-                    currDisplay.gGamma = (float)trackBarGamma.Value / 10f;
+                    currDisplay.gGamma = (float)trackBarGamma.Value / 100f;
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, currDisplay.rContrast,
                         currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, currDisplay.bBright));
@@ -221,7 +219,7 @@ namespace Gamma_Manager
 
                 if (blueColor)
                 {
-                    currDisplay.bGamma = (float)trackBarGamma.Value / 10f;
+                    currDisplay.bGamma = (float)trackBarGamma.Value / 100f;
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, currDisplay.rContrast,
                         currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, currDisplay.bBright));
@@ -290,13 +288,13 @@ namespace Gamma_Manager
 
             if (!disableChangeFunc)
             {
-                textBoxBrightness.Text = ((float)trackBarBrightness.Value / 10f).ToString("0.0");
+                textBoxBrightness.Text = ((float)trackBarBrightness.Value / 100f).ToString("0.00");
 
                 if (allColors)
                 {
-                    currDisplay.rBright = (float)trackBarBrightness.Value / 10f;
-                    currDisplay.gBright = (float)trackBarBrightness.Value / 10f;
-                    currDisplay.bBright = (float)trackBarBrightness.Value / 10f;
+                    currDisplay.rBright = (float)trackBarBrightness.Value / 100f;
+                    currDisplay.gBright = (float)trackBarBrightness.Value / 100f;
+                    currDisplay.bBright = (float)trackBarBrightness.Value / 100f;
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, currDisplay.rContrast,
                         currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, currDisplay.bBright));
@@ -305,7 +303,7 @@ namespace Gamma_Manager
 
                 if (redColor)
                 {
-                    currDisplay.rBright = (float)trackBarBrightness.Value / 10f;
+                    currDisplay.rBright = (float)trackBarBrightness.Value / 100f;
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, currDisplay.rContrast,
                         currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, currDisplay.bBright));
@@ -314,7 +312,7 @@ namespace Gamma_Manager
 
                 if (greenColor)
                 {
-                    currDisplay.gBright = (float)trackBarBrightness.Value / 10f;
+                    currDisplay.gBright = (float)trackBarBrightness.Value / 100f;
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, currDisplay.rContrast,
                         currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, currDisplay.bBright));
@@ -323,7 +321,7 @@ namespace Gamma_Manager
 
                 if (blueColor)
                 {
-                    currDisplay.bBright = (float)trackBarBrightness.Value / 10f;
+                    currDisplay.bBright = (float)trackBarBrightness.Value / 100f;
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, currDisplay.rContrast,
                         currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, currDisplay.bBright));
@@ -346,11 +344,11 @@ namespace Gamma_Manager
 
                 if (currDisplay.isExternal)
                 {
-                    ExternalBrightness.SetBrightness(currDisplay.PhysicalHandle, (uint)trackBarMonitorBrightness.Value);
+                    ExternalMonitor.SetBrightness(currDisplay.PhysicalHandle, (uint)trackBarMonitorBrightness.Value);
                 }
                 else
                 {
-                    InternalBrightness.SetBrightness((byte)trackBarMonitorBrightness.Value);
+                    InternalMonitor.SetBrightness((byte)trackBarMonitorBrightness.Value);
                 }
             }
         }
@@ -365,7 +363,7 @@ namespace Gamma_Manager
 
                 currDisplay.monitorContrast = trackBarMonitorContrast.Value;
 
-                ExternalBrightness.SetContrast(currDisplay.PhysicalHandle, (uint)trackBarMonitorContrast.Value);
+                ExternalMonitor.SetContrast(currDisplay.PhysicalHandle, (uint)trackBarMonitorContrast.Value);
             }
         }
 
@@ -375,13 +373,13 @@ namespace Gamma_Manager
             clearColors();
             allColors = true;
 
-            textBoxGamma.Text = ((currDisplay.rGamma + currDisplay.gGamma + currDisplay.bGamma) / 3f).ToString("0.0");
+            textBoxGamma.Text = ((currDisplay.rGamma + currDisplay.gGamma + currDisplay.bGamma) / 3f).ToString("0.00");
             textBoxContrast.Text = ((currDisplay.rContrast + currDisplay.gContrast + currDisplay.bContrast) / 3f).ToString("0.00");
-            textBoxBrightness.Text = ((currDisplay.rBright + currDisplay.gBright + currDisplay.bBright) / 3f).ToString("0.0");
+            textBoxBrightness.Text = ((currDisplay.rBright + currDisplay.gBright + currDisplay.bBright) / 3f).ToString("0.00");
 
-            trackBarGamma.Value = (int)(((currDisplay.rGamma + currDisplay.gGamma + currDisplay.bGamma) / 3f) * 10f);
+            trackBarGamma.Value = (int)(((currDisplay.rGamma + currDisplay.gGamma + currDisplay.bGamma) / 3f) * 100f);
             trackBarContrast.Value = (int)(((currDisplay.rContrast + currDisplay.gContrast + currDisplay.bContrast) / 3f) * 100f);
-            trackBarBrightness.Value = (int)(((currDisplay.rBright + currDisplay.gBright + currDisplay.bBright) / 3f) * 10f);
+            trackBarBrightness.Value = (int)(((currDisplay.rBright + currDisplay.gBright + currDisplay.bBright) / 3f) * 100f);
 
             buttonAllColors.Font = new Font(buttonAllColors.Font.Name, buttonAllColors.Font.Size, FontStyle.Bold);
             disableChangeFunc = false;
@@ -393,13 +391,13 @@ namespace Gamma_Manager
             clearColors();
             redColor = true;
 
-            textBoxGamma.Text = currDisplay.rGamma.ToString("0.0");
+            textBoxGamma.Text = currDisplay.rGamma.ToString("0.00");
             textBoxContrast.Text = currDisplay.rContrast.ToString("0.00");
-            textBoxBrightness.Text = currDisplay.rBright.ToString("0.0");
+            textBoxBrightness.Text = currDisplay.rBright.ToString("0.00");
 
-            trackBarGamma.Value = (int)(currDisplay.rGamma * 10f);
+            trackBarGamma.Value = (int)(currDisplay.rGamma * 100f);
             trackBarContrast.Value = (int)(currDisplay.rContrast * 100f);
-            trackBarBrightness.Value = (int)(currDisplay.rBright * 10f);
+            trackBarBrightness.Value = (int)(currDisplay.rBright * 100f);
 
             buttonRed.Font = new Font(buttonRed.Font.Name, buttonRed.Font.Size, FontStyle.Bold);
             disableChangeFunc = false;
@@ -411,13 +409,13 @@ namespace Gamma_Manager
             clearColors();
             greenColor = true;
 
-            textBoxGamma.Text = currDisplay.gGamma.ToString("0.0");
+            textBoxGamma.Text = currDisplay.gGamma.ToString("0.00");
             textBoxContrast.Text = currDisplay.gContrast.ToString("0.00");
-            textBoxBrightness.Text = currDisplay.gBright.ToString("0.0");
+            textBoxBrightness.Text = currDisplay.gBright.ToString("0.00");
 
-            trackBarGamma.Value = (int)(currDisplay.gGamma * 10f);
+            trackBarGamma.Value = (int)(currDisplay.gGamma * 100f);
             trackBarContrast.Value = (int)(currDisplay.gContrast * 100f);
-            trackBarBrightness.Value = (int)(currDisplay.gBright * 10f);
+            trackBarBrightness.Value = (int)(currDisplay.gBright * 100f);
 
             buttonGreen.Font = new Font(buttonGreen.Font.Name, buttonGreen.Font.Size, FontStyle.Bold);
             disableChangeFunc = false;
@@ -429,13 +427,13 @@ namespace Gamma_Manager
             clearColors();
             blueColor = true;
 
-            textBoxGamma.Text = currDisplay.bGamma.ToString("0.0");
+            textBoxGamma.Text = currDisplay.bGamma.ToString("0.00");
             textBoxContrast.Text = currDisplay.bContrast.ToString("0.00");
-            textBoxBrightness.Text = currDisplay.bBright.ToString("0.0");
+            textBoxBrightness.Text = currDisplay.bBright.ToString("0.00");
 
-            trackBarGamma.Value = (int)(currDisplay.bGamma * 10f);
+            trackBarGamma.Value = (int)(currDisplay.bGamma * 100f);
             trackBarContrast.Value = (int)(currDisplay.bContrast * 100f);
-            trackBarBrightness.Value = (int)(currDisplay.bBright * 10f);
+            trackBarBrightness.Value = (int)(currDisplay.bBright * 100f);
 
             buttonBlue.Font = new Font(buttonBlue.Font.Name, buttonBlue.Font.Size, FontStyle.Bold);
             disableChangeFunc = false;
@@ -486,7 +484,7 @@ namespace Gamma_Manager
         {
             comboBoxPresets.Text = string.Empty;
 
-            trackBarGamma.Value = 10;
+            trackBarGamma.Value = 100;
             trackBarContrast.Value = 100;
             trackBarBrightness.Value = 0;
 
@@ -500,16 +498,18 @@ namespace Gamma_Manager
             currDisplay.gBright = 0;
             currDisplay.bBright = 0;
 
+            
             if (currDisplay.isExternal)
             {
 
-                trackBarMonitorBrightness.Value = 25;
+                trackBarMonitorBrightness.Value = 100;
 
                 trackBarMonitorContrast.Value = 50;
             } else
             {
                 trackBarMonitorBrightness.Value = 100;
             }
+            
 
             Gamma.SetGammaRamp(displays[numDisplay].displayLink, Gamma.CreateGammaRamp(1, 1, 1, 1, 1, 1, 0, 0, 0));
         }
@@ -577,15 +577,24 @@ namespace Gamma_Manager
         }
 
         //tray
+        private void Window_Resize(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Minimized)
+            {
+                Hide();
+            }
+        }
 
         private void notifyIcon_DoubleClick(object sender, EventArgs e)
         {
             Show();
+            WindowState = FormWindowState.Normal;
         }
 
         private void toolSettings_Click(object sender, EventArgs e)
         {
             Show();
+            WindowState = FormWindowState.Normal;
         }
 
         private void toolExit_Click(object sender, EventArgs e)
@@ -593,7 +602,7 @@ namespace Gamma_Manager
             Close();
         }
 
-        private void comboBoxToolMonitor_SelectedIndexChanged(object sender, EventArgs e)
+        private void comboBoxToolMonitor_TextChanged(object sender, EventArgs e)
         {
             if (!disableChangeFunc)
             {

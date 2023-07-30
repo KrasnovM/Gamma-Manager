@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace Gamma_Manager
@@ -132,12 +131,12 @@ namespace Gamma_Manager
                 }
                 if (monitor.isExternal)
                 {
-                    monitor.monitorBrightness = ExternalBrightness.GetBrightness(monitor.PhysicalHandle);
-                    monitor.monitorContrast = ExternalBrightness.GetContrast(monitor.PhysicalHandle);
+                    monitor.monitorBrightness = ExternalMonitor.GetBrightness(monitor.PhysicalHandle);
+                    monitor.monitorContrast = ExternalMonitor.GetContrast(monitor.PhysicalHandle);
                 }
                 else
                 {
-                    monitor.monitorBrightness = InternalBrightness.GetBrightness();
+                    monitor.monitorBrightness = InternalMonitor.GetBrightness();
                     monitor.monitorContrast = -1;
                 }
                 monitors.Add(monitor);

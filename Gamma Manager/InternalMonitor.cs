@@ -2,8 +2,9 @@
 
 namespace Gamma_Manager
 {
-    internal class InternalBrightness
+    internal class InternalMonitor
     {
+        //For built-in laptop monitors
         //Found somewhere, don't want to revise, it just works
 
         public static int GetBrightness()

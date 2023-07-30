@@ -6,12 +6,12 @@ using System.Runtime.InteropServices;
 // набора атрибутов. Измените значения этих атрибутов для изменения сведений,
 // связанных со сборкой.
 [assembly: AssemblyTitle("Gamma Manager")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyDescription("Gamma Manager")]
+[assembly: AssemblyConfiguration("Release 1.0")]
+[assembly: AssemblyCompany("KrasnovM")]
 [assembly: AssemblyProduct("Gamma Manager")]
 [assembly: AssemblyCopyright("Copyright © 2023")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyTrademark("KrasnovM")]
 [assembly: AssemblyCulture("")]
 
 // Установка значения False для параметра ComVisible делает типы в этой сборке невидимыми
@@ -20,8 +20,9 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Следующий GUID служит для идентификации библиотеки типов, если этот проект будет видимым для COM
-[assembly: Guid("c625d24d-2184-496d-a439-cf2f405044ba")]
+[assembly: Guid("2efc2fc6-5d10-40ca-b41c-2e5084ad03a1")]
 
+//c625d24d-2184-496d-a439-cf2f405044ba
 // Сведения о версии сборки состоят из указанных ниже четырех значений:
 //
 //      Основной номер версии

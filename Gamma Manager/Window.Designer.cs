@@ -74,13 +74,14 @@
             // 
             this.trackBarGamma.LargeChange = 1;
             this.trackBarGamma.Location = new System.Drawing.Point(81, 5);
-            this.trackBarGamma.Maximum = 44;
-            this.trackBarGamma.Minimum = 3;
+            this.trackBarGamma.Maximum = 440;
+            this.trackBarGamma.Minimum = 30;
             this.trackBarGamma.Name = "trackBarGamma";
             this.trackBarGamma.Size = new System.Drawing.Size(253, 56);
+            this.trackBarGamma.SmallChange = 5;
             this.trackBarGamma.TabIndex = 0;
             this.trackBarGamma.TickStyle = System.Windows.Forms.TickStyle.None;
-            this.trackBarGamma.Value = 10;
+            this.trackBarGamma.Value = 100;
             this.trackBarGamma.ValueChanged += new System.EventHandler(this.trackBarGamma_ValueChanged);
             // 
             // buttonRed
@@ -180,9 +181,11 @@
             // 
             this.trackBarBrightness.LargeChange = 1;
             this.trackBarBrightness.Location = new System.Drawing.Point(81, 30);
-            this.trackBarBrightness.Minimum = -10;
+            this.trackBarBrightness.Maximum = 100;
+            this.trackBarBrightness.Minimum = -100;
             this.trackBarBrightness.Name = "trackBarBrightness";
             this.trackBarBrightness.Size = new System.Drawing.Size(253, 56);
+            this.trackBarBrightness.SmallChange = 5;
             this.trackBarBrightness.TabIndex = 10;
             this.trackBarBrightness.TickStyle = System.Windows.Forms.TickStyle.None;
             this.trackBarBrightness.ValueChanged += new System.EventHandler(this.trackBarBrightness_ValueChanged);
@@ -376,7 +379,7 @@
             this.pictureBox1.InitialImage = null;
             this.pictureBox1.Location = new System.Drawing.Point(524, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(250, 200);
+            this.pictureBox1.Size = new System.Drawing.Size(256, 200);
             this.pictureBox1.TabIndex = 28;
             this.pictureBox1.TabStop = false;
             // 
@@ -391,7 +394,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(779, 208);
+            this.ClientSize = new System.Drawing.Size(782, 203);
             this.Controls.Add(this.buttonBlue);
             this.Controls.Add(this.checkBoxExContrast);
             this.Controls.Add(this.buttonForward);
@@ -422,13 +425,14 @@
             this.Controls.Add(this.buttonRed);
             this.Controls.Add(this.trackBarBrightness);
             this.Controls.Add(this.trackBarGamma);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.Name = "Window";
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Gamma Manager";
             this.TopMost = true;
             this.Load += new System.EventHandler(this.Window_Load);
+            this.Resize += new System.EventHandler(this.Window_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.trackBarGamma)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarContrast)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBarBrightness)).EndInit();
