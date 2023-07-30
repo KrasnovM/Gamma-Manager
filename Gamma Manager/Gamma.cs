@@ -12,12 +12,6 @@ namespace Gamma_Manager
             else return val;
         }
 
-        public static float[] GetGammaRamp ()
-        {
-
-            return null;
-        }
-
         public static ushort[,] CreateGammaRamp(float rGamma, float gGamma, float bGamma, float rContrast, float gContrast, float bContrast, float rBright, float gBright, float bBright)
         {
             //Gamma check

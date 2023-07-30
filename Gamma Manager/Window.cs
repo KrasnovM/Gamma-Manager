@@ -46,7 +46,7 @@ namespace Gamma_Manager
             {
                 for (int i = 0; i < presets.Length; i++)
                 {
-                    if (iniFile.Read("monitor", presets[i]) == currDisplay.displayName)
+                    if (iniFile.Read("monitor", presets[i]).Equals(currDisplay.displayName))
                     {
                         comboBoxPresets.Items.Add(presets[i]);
                     }
@@ -57,6 +57,7 @@ namespace Gamma_Manager
         private void initTrayMenu()
         {
             contextMenu.Items.Clear();
+            toolMonitors.Clear();
 
             ToolStripMenuItem toolSetting = new ToolStripMenuItem("Settings", null, toolSettings_Click);
             contextMenu.Items.Add(toolSetting);
@@ -72,14 +73,14 @@ namespace Gamma_Manager
                 toolMonitor.Items.Add(displays[i].displayName + ":");
                 toolMonitor.Text = displays[i].displayName + ":";
 
-                toolMonitor.SelectedIndexChanged += new EventHandler(comboBoxToolMonitor_TextChanged);
+                toolMonitor.SelectedIndexChanged += new EventHandler(comboBoxToolMonitor_IndexChanged);
 
                 string[] presets = iniFile.GetSections();
                 if (presets != null)
                 {
                     for (int j = 0; j < presets.Length; j++)
                     {
-                        if (iniFile.Read("monitor", presets[j]) == displays[i].displayName)
+                        if (iniFile.Read("monitor", presets[j]).Equals(displays[i].displayName))
                         {
                             //preset.name = presets[j].Substring(presets[j].IndexOf(")") + 1);
                             toolMonitor.Items.Add(presets[j]);
@@ -484,6 +485,8 @@ namespace Gamma_Manager
         {
             comboBoxPresets.Text = string.Empty;
 
+            buttonAllColors.PerformClick();
+
             trackBarGamma.Value = 100;
             trackBarContrast.Value = 100;
             trackBarBrightness.Value = 0;
@@ -512,6 +515,9 @@ namespace Gamma_Manager
             
 
             Gamma.SetGammaRamp(displays[numDisplay].displayLink, Gamma.CreateGammaRamp(1, 1, 1, 1, 1, 1, 0, 0, 0));
+
+            initPresets();
+            initTrayMenu();
         }
 
         private void buttonHide_Click(object sender, EventArgs e)
@@ -545,34 +551,40 @@ namespace Gamma_Manager
 
         private void comboBoxPresets_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string test = comboBoxPresets.Text;
-            currDisplay.rGamma = float.Parse(iniFile.Read("rGamma", comboBoxPresets.Text), customCulture);
-            currDisplay.gGamma = float.Parse(iniFile.Read("gGamma", comboBoxPresets.Text), customCulture);
-            currDisplay.bGamma = float.Parse(iniFile.Read("bGamma", comboBoxPresets.Text), customCulture);
-            currDisplay.rContrast = float.Parse(iniFile.Read("rContrast", comboBoxPresets.Text), customCulture);
-            currDisplay.gContrast = float.Parse(iniFile.Read("gContrast", comboBoxPresets.Text), customCulture);
-            currDisplay.bContrast = float.Parse(iniFile.Read("bContrast", comboBoxPresets.Text), customCulture);
-            currDisplay.rBright = float.Parse(iniFile.Read("rBright", comboBoxPresets.Text), customCulture);
-            currDisplay.gBright = float.Parse(iniFile.Read("gBright", comboBoxPresets.Text), customCulture);
-            currDisplay.bBright = float.Parse(iniFile.Read("bBright", comboBoxPresets.Text), customCulture);
-            currDisplay.monitorBrightness = int.Parse(iniFile.Read("monitorBrightness", comboBoxPresets.Text));
-            currDisplay.monitorContrast = int.Parse(iniFile.Read("monitorContrast", comboBoxPresets.Text));
-
-            fillInfo(currDisplay);
-
-            Gamma.SetGammaRamp(currDisplay.displayLink,
-                Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma, 
-                currDisplay.rContrast,currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright, 
-                currDisplay.bBright));
-
-            if (currDisplay.isExternal)
+            if (!disableChangeFunc)
             {
-                trackBarMonitorBrightness.Value = currDisplay.monitorBrightness;
-                trackBarMonitorContrast.Value = currDisplay.monitorContrast;
-            }
-            else
-            {
-                trackBarMonitorBrightness.Value = currDisplay.monitorBrightness;
+                string test = comboBoxPresets.Text;
+                currDisplay.rGamma = float.Parse(iniFile.Read("rGamma", comboBoxPresets.Text), customCulture);
+                currDisplay.gGamma = float.Parse(iniFile.Read("gGamma", comboBoxPresets.Text), customCulture);
+                currDisplay.bGamma = float.Parse(iniFile.Read("bGamma", comboBoxPresets.Text), customCulture);
+                currDisplay.rContrast = float.Parse(iniFile.Read("rContrast", comboBoxPresets.Text), customCulture);
+                currDisplay.gContrast = float.Parse(iniFile.Read("gContrast", comboBoxPresets.Text), customCulture);
+                currDisplay.bContrast = float.Parse(iniFile.Read("bContrast", comboBoxPresets.Text), customCulture);
+                currDisplay.rBright = float.Parse(iniFile.Read("rBright", comboBoxPresets.Text), customCulture);
+                currDisplay.gBright = float.Parse(iniFile.Read("gBright", comboBoxPresets.Text), customCulture);
+                currDisplay.bBright = float.Parse(iniFile.Read("bBright", comboBoxPresets.Text), customCulture);
+                currDisplay.monitorBrightness = int.Parse(iniFile.Read("monitorBrightness", comboBoxPresets.Text));
+                currDisplay.monitorContrast = int.Parse(iniFile.Read("monitorContrast", comboBoxPresets.Text));
+
+                fillInfo(currDisplay);
+                clearColors();
+                buttonAllColors.PerformClick();
+                initTrayMenu();
+
+                Gamma.SetGammaRamp(currDisplay.displayLink,
+                    Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma,
+                    currDisplay.rContrast, currDisplay.gContrast, currDisplay.bContrast, currDisplay.rBright, currDisplay.gBright,
+                    currDisplay.bBright));
+
+                if (currDisplay.isExternal)
+                {
+                    trackBarMonitorBrightness.Value = currDisplay.monitorBrightness;
+                    trackBarMonitorContrast.Value = currDisplay.monitorContrast;
+                }
+                else
+                {
+                    trackBarMonitorBrightness.Value = currDisplay.monitorBrightness;
+                }
             }
         }
 
@@ -602,7 +614,7 @@ namespace Gamma_Manager
             Close();
         }
 
-        private void comboBoxToolMonitor_TextChanged(object sender, EventArgs e)
+        private void comboBoxToolMonitor_IndexChanged(object sender, EventArgs e)
         {
             if (!disableChangeFunc)
             {
@@ -613,6 +625,7 @@ namespace Gamma_Manager
                 int tmp = 0;
 
                 disableChangeFunc = true;
+
                 for (int i = 0; i < displays.Count; i++)
                 {
                     if (monitor.Equals(displays[i].displayName))
@@ -637,7 +650,7 @@ namespace Gamma_Manager
                         if (displays[i].displayName.Equals(toolMonitor.Items[0].ToString().Substring(0, toolMonitor.Items[0].ToString().IndexOf(":"))))
                         {
                             comboBoxMonitors.Text = i + 1 + ") " + displays[i].displayName;
-
+                            
                             numDisplay = i;
                             currDisplay.numDisplay = numDisplay;
                             currDisplay.displayLink = displays[i].displayLink;
@@ -661,6 +674,8 @@ namespace Gamma_Manager
                     currDisplay.monitorContrast = int.Parse(iniFile.Read("monitorContrast", toolMonitor.Text));
 
                     fillInfo(currDisplay);
+                    initPresets();
+                    buttonAllColors.PerformClick();
 
                     Gamma.SetGammaRamp(currDisplay.displayLink,
                         Gamma.CreateGammaRamp(currDisplay.rGamma, currDisplay.gGamma, currDisplay.bGamma,
@@ -676,7 +691,6 @@ namespace Gamma_Manager
                     {
                         trackBarMonitorBrightness.Value = currDisplay.monitorBrightness;
                     }
-                    comboBoxPresets.Text = toolMonitor.Text;
                 }
             }
         }
