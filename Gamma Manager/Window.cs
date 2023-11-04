@@ -455,17 +455,17 @@ namespace Gamma_Manager
         {
             string tmp = comboBoxPresets.Text;
             iniFile.Write("monitor", currDisplay.displayName, currDisplay.displayName+": "+ comboBoxPresets.Text);
-            iniFile.Write("rGamma", currDisplay.rGamma.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("gGamma", currDisplay.gGamma.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("bGamma", currDisplay.bGamma.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("rContrast", currDisplay.rContrast.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("gContrast", currDisplay.gContrast.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("bContrast", currDisplay.bContrast.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("rBright", currDisplay.rBright.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("gBright", currDisplay.gBright.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("bBright", currDisplay.bBright.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("monitorBrightness", currDisplay.monitorBrightness.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
-            iniFile.Write("monitorContrast", currDisplay.monitorContrast.ToString(), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("rGamma", currDisplay.rGamma.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("gGamma", currDisplay.gGamma.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("bGamma", currDisplay.bGamma.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("rContrast", currDisplay.rContrast.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("gContrast", currDisplay.gContrast.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("bContrast", currDisplay.bContrast.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("rBright", currDisplay.rBright.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("gBright", currDisplay.gBright.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("bBright", currDisplay.bBright.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("monitorBrightness", currDisplay.monitorBrightness.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
+            iniFile.Write("monitorContrast", currDisplay.monitorContrast.ToString(customCulture), currDisplay.displayName + ": " + comboBoxPresets.Text);
 
             initPresets();
             comboBoxPresets.Text = currDisplay.displayName + ": " + tmp;

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // связанных со сборкой.
 [assembly: AssemblyTitle("Gamma Manager")]
 [assembly: AssemblyDescription("Gamma Manager")]
-[assembly: AssemblyConfiguration("Release 1.0")]
+[assembly: AssemblyConfiguration("Release 1.2")]
 [assembly: AssemblyCompany("KrasnovM")]
 [assembly: AssemblyProduct("Gamma Manager")]
 [assembly: AssemblyCopyright("Copyright © 2023")]
@@ -33,5 +33,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.2.0.0")]
+[assembly: AssemblyFileVersion("1.2.0.0")]
